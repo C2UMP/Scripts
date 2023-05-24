@@ -65,6 +65,11 @@ def main() -> None:
 					
 					material_path = json_data.get('Textures', {}).get('L0_Map_C_and_A', None)
 
+					if material_path == None:
+						for key, value in json_data.get('Textures', {}).items():
+							texture_name = value.split('.')[1]
+							if texture_name.startswith('T_') and texture_name.endswith('_C'): material_path = value
+
 				if material_path == None:
 					print('Could not resolve material! Skipping...')
 					continue
